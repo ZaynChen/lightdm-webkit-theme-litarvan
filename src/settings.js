@@ -41,8 +41,12 @@ if (!settings.blur) {
 }
 
 // Handle display name change
-lightdm.users.forEach(u => settings.user.username === u.username && (settings.user = u));
-lightdm.sessions.forEach(s => settings.desktop.username === s.key && (settings.desktop = s));
+settgins.user =
+    lightdm.users.find((u) => settings.user.username === u.username) ||
+    settings.user;
+settings.desktop =
+    lightdm.sessions.find((s) => settings.desktop.key === s.key) ||
+    settings.desktop;
 
 function save() {
     localStorage.setItem('settings', JSON.stringify(toRaw(settings)));
