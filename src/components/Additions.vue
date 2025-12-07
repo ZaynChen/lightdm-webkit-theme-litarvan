@@ -126,7 +126,7 @@ function getImageUrl(path) {
 </template>
 
 <style lang="scss" scoped>
-@import '../theme';
+@use '../theme';
 
 #additions {
     display: flex;

@@ -48,7 +48,7 @@ function getImageUrl(name) {
 </template>
 
 <style lang="scss" scoped>
-@import '../theme';
+@use '../theme';
 
 #button-container {
     transition: background 125ms ease-in-out;

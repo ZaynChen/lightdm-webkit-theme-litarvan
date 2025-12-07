@@ -41,11 +41,11 @@ onUnmounted(() => {
 </template>
 
 <style lang="scss">
-@import '_theme';
+@use '_theme';
 
 html.lightdm {
-    background: $outer-background !important;
-    color: $secondary-color;
+    background: theme.$outer-background !important;
+    color: theme.$secondary-color;
 }
 
 /* HiDPI */

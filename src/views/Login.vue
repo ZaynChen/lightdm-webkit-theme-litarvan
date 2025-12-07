@@ -148,7 +148,7 @@ onBeforeUnmount(() => {
 </template>
 
 <style lang="scss" scoped>
-@import '../theme';
+@use '../theme';
 
 .login.compact {
     .clock {
@@ -277,7 +277,7 @@ onBeforeUnmount(() => {
 }
 
 #password::placeholder {
-    color: rgba($secondary-color, 0.55);
+    color: rgba(theme.$secondary-color, 0.55);
     opacity: 1;
 }
 
@@ -290,9 +290,9 @@ onBeforeUnmount(() => {
 
     font-family: 'Lato', 'Noto Sans', sans-serif;
 
-    background: $password-field-background;
-    caret-color: $password-field-caret;
-    color: $secondary-color;
+    background: theme.$password-field-background;
+    caret-color: theme.$password-field-caret;
+    color: theme.$secondary-color;
 
     padding-left: 15px;
     padding-right: 15px;
@@ -308,12 +308,12 @@ onBeforeUnmount(() => {
 }
 
 #password.error {
-    border-bottom-color: $error-color !important;
+    border-bottom-color: theme.$error-color !important;
 }
 
 #password.immutable {
     display: inline-block;
-    background: $password-field-background-setup;
+    background: theme.$password-field-background-setup;
     border-bottom-width: 6px;
 }
 
@@ -331,7 +331,7 @@ onBeforeUnmount(() => {
 }
 
 .error-msg {
-    color: $error-color;
+    color: theme.$error-color;
 
     font-family: 'Lato', 'Noto Sans', sans-serif;
     font-size: 22px;

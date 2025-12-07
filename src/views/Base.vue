@@ -47,7 +47,7 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
-@import '../theme';
+@use '../theme';
 
 .bg {
     background-size: cover;
@@ -60,7 +60,7 @@ onMounted(() => {
 
     z-index: -1;
 
-    color: $secondary-color;
+    color: theme.$secondary-color;
 
     &.absolute {
         position: absolute;

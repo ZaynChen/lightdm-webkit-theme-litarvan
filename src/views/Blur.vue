@@ -44,13 +44,13 @@ const texts = {
 </template>
 
 <style lang="scss">
-@import "../theme";
+@use "../theme";
 
 #blur-view {
     font-family: 'Lato', 'Noto Sans', sans-serif;
     font-weight: 300;
 
-    color: $outer-foreground;
+    color: theme.$outer-foreground;
 
     display: flex;
     flex-direction: column;

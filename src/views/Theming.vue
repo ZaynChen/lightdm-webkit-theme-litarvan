@@ -159,10 +159,10 @@ function getImageUrl(name) {
 </template>
 
 <style lang="scss">
-@import "../theme";
+@use "../theme";
 
 #theming-view {
-    color: $outer-foreground;
+    color: theme.$outer-foreground;
     text-align: left;
 
     font-family: 'Lato', 'Noto Sans', sans-serif;
@@ -254,7 +254,7 @@ function getImageUrl(name) {
         border: none;
         border-bottom: solid 1px #ffffffcc;
 
-        color: $outer-foreground;
+        color: theme.$outer-foreground;
         background: none;
 
         margin-left: 8px;

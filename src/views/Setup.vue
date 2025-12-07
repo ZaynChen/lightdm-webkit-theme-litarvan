@@ -97,13 +97,13 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
-@import '../theme';
+@use '../theme';
 
 #setup {
     font-family: 'Lato', 'Noto Sans', sans-serif;
     font-weight: 300;
 
-    color: $outer-foreground;
+    color: theme.$outer-foreground;
 }
 
 #setup-title {
@@ -126,7 +126,7 @@ onMounted(() => {
 .layout {
     display: inline-block;
 
-    border: solid 2px darken($outer-foreground, 60);
+    border: solid 2px adjust(theme.$outer-foreground, -60%);
     border-radius: 2px;
     transition: border-color 125ms ease-in-out;
 
@@ -140,13 +140,13 @@ onMounted(() => {
 
 .layout:hover {
     cursor: pointer;
-    // border-color: lighten($primary-color, 25);
-    border-color: darken($outer-foreground, 30);
+    // border-color: lighten(theme.$primary-color, 25);
+    border-color: adjust(theme.$outer-foreground, -30%);
 }
 
 .layout.selected {
-    // border-color: $primary-color;
-    border-color: $outer-foreground;
+    // border-color: theme.$primary-color;
+    border-color: theme.$outer-foreground;
 }
 
 #classic-layout {

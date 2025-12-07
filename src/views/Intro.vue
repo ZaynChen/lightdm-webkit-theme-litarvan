@@ -59,10 +59,10 @@ function getImageUrl(name) {
 </template>
 
 <style lang="scss" scoped>
-@import '../theme';
+@use '../theme';
 
 #intro {
-    background-color: $outer-background;
+    background-color: theme.$outer-background;
 
     display: flex;
     align-items: center;
@@ -81,7 +81,7 @@ function getImageUrl(name) {
 #power-text {
     font-family: 'Lato', 'Noto Sans', serif;
     font-weight: normal;
-    color: $outer-foreground;
+    color: theme.$outer-foreground;
     font-size: 58px;
 }
 
