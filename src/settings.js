@@ -41,7 +41,7 @@ if (!settings.blur) {
 }
 
 // Handle display name change
-settgins.user =
+settings.user =
     lightdm.users.find((u) => settings.user.username === u.username) ||
     settings.user;
 settings.desktop =
