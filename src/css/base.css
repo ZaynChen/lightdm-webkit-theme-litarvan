@@ -1,0 +1,15 @@
+:root {
+  --secondary-color: white;
+  --error-color: #de3c2d;
+  --password-field-background: rgba(255, 255, 255, 0.2);
+  --password-field-caret: rgba(var(--password-field-background), 0.6);
+  /* Background on setup screen */
+  --password-field-background-setup: alpha(
+    var(--password-field-background),
+    0.3
+  );
+
+  --outer-background: black;
+  /* Text color mostly */
+  --outer-foreground: white;
+}

@@ -1,51 +1,51 @@
-<script setup>
-import { ref, onMounted, watch } from 'vue'
-import { color } from '@/themer';
+<script setup lang="ts">
+import { ref, onMounted, watch } from "vue";
+import { color } from "@/ts/themer";
 
-const props = defineProps(['modelValue'])
-const emit = defineEmits(['update:modelValue'])
-const box = ref(null)
+const props = defineProps(["modelValue"]);
+const emit = defineEmits(["update:modelValue"]);
+const box = ref<HTMLElement | null>(null);
 
-function updateStyle(checked, color) {
-    const style = box.value.style;
-    const col = checked ? color : null;
+function updateStyle(checked: boolean, color: string) {
+  const style = box.value?.style;
+  const col = checked ? color : null;
 
-    style['border-color'] = col;
-    style['background'] = col;
+  style?.setProperty("border-color", col);
+  style?.setProperty("background", col);
 }
 
 function update() {
-    emit('update:modelValue', !props.modelValue);
+  emit("update:modelValue", !props.modelValue);
 }
 
 // when color or checkbox value changes, update style
-watch([() => props.modelValue, color], ([val, cval]) => updateStyle(val, cval))
+watch([() => props.modelValue, color], ([val, cval]) => updateStyle(val, cval));
 
 onMounted(() => {
-    updateStyle(props.modelValue, color.value)
-})
-
+  updateStyle(props.modelValue, color.value);
+});
 </script>
 
 <template>
-    <div class="checkbox" @click="update" ref="box">
-    </div>
+  <div class="checkbox" @click="update" ref="box"></div>
 </template>
 
-<style lang="scss">
+<style scoped>
 .checkbox {
-    border: solid 2px;
-    border-radius: 2px;
+  border: solid 2px;
+  border-radius: 2px;
 
-    transition: border-color 150ms ease-in-out, background 125ms ease-in-out;
+  transition:
+    border-color 150ms ease-in-out,
+    background 125ms ease-in-out;
 
-    width: 22px;
-    height: 22px;
+  width: 22px;
+  height: 22px;
 
-    display: inline-block;
+  display: inline-block;
 }
 
 .checkbox:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 </style>
