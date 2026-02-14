@@ -34,17 +34,13 @@ export default defineConfig({
         // css, ttf to css dir
         // default to assets dir
         assetFileNames: ({ name }) => {
-          if (/\.(gif|jpe?g|png|svg)$/.test(name ?? "")) {
-            return "assets/[name]-[hash][extname]";
-          }
-
           if (/\.(css|ttf)$/.test(name ?? "")) {
             return "css/[name]-[hash][extname]";
           }
 
           // default value
           // ref: https://rolldown.rs/reference/OutputOptions.assetFileNames
-          return "assets/[name]-[hash][extname]";
+          return "assets/[name][extname]";
         },
       },
     },
