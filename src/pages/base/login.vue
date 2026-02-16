@@ -62,12 +62,12 @@ function submit() {
   }, 150);
 }
 
-function show_prompt(_type: string, text: string) {
-  // console.log("show_prompt: " + _type + ", " + text);
+function show_prompt(text: string, _type: string) {
+  // console.log("show_prompt: " + text + ", " + _type);
   logging.value = text !== "Password: ";
 }
 
-function show_message(type: string, text: string) {
+function show_message(text: string, type: string) {
   // console.log("show_message: " + type + ", " + text);
   error.value = true;
   logging.value = false;

@@ -122,22 +122,22 @@ watch(lastUser, (lastUser) => {
 lastUser.value =
   users.find((u) => u.username === lastUser.value?.username) ?? users[0];
 
-function connect_show_prompt(callback: (type: string, text: string) => void) {
+function connect_show_prompt(callback: (text: string, type: string) => void) {
   greeter?.show_prompt.connect(callback);
 }
 
 function disconnect_show_prompt(
-  callback: (type: string, text: string) => void,
+  callback: (text: string, type: string) => void,
 ) {
   greeter?.show_prompt.disconnect(callback);
 }
 
-function connect_show_message(callback: (type: string, text: string) => void) {
+function connect_show_message(callback: (text: string, type: string) => void) {
   greeter?.show_message.connect(callback);
 }
 
 function disconnect_show_message(
-  callback: (type: string, text: string) => void,
+  callback: (text: string, type: string) => void,
 ) {
   greeter?.show_message.disconnect(callback);
 }
