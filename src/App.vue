@@ -2,7 +2,7 @@
 import { onMounted, onUnmounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 
-import { settings } from "@/ts/settings";
+import { settings } from "./ts/settings";
 
 const router = useRouter();
 const route = useRoute();

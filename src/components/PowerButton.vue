@@ -26,16 +26,16 @@ function apply() {
   let action;
   switch (props.type) {
     case "restart":
-      action = greeter?.restart;
+      action = greeter.restart;
       break;
     case "hibernate":
-      action = greeter?.hibernate;
+      action = greeter.hibernate;
       break;
     case "suspend":
-      action = greeter?.suspend;
+      action = greeter.suspend;
       break;
     case "shutdown":
-      action = greeter?.shutdown;
+      action = greeter.shutdown;
       break;
   }
   action ??= () => console.log(`invoke action: ${props.type}`);
@@ -49,19 +49,15 @@ function apply() {
   router.push("/");
 }
 
-function getImageUrl(name: string) {
-  return new URL(`../assets/images/${name}`, import.meta.url).href;
+function icon() {
+  return new URL(`../assets/images/${props.type}.svg`, import.meta.url).href;
 }
 </script>
 
 <template>
   <div class="power-button">
     <div id="button-container" @click="disabled ? '' : apply()">
-      <img
-        id="power-button-icon"
-        :class="{ type }"
-        :src="getImageUrl(`${type}.svg`)"
-      />
+      <img id="power-button-icon" :class="{ type }" :src="icon()" />
     </div>
   </div>
 </template>

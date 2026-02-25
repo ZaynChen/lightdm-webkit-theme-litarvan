@@ -28,7 +28,7 @@ function authSuccess() {
 
 onMounted(() => {
   if (isSecondary) {
-    greeter?.authentication_complete?.connect(authSuccess);
+    greeter.authentication_complete?.connect(authSuccess);
   } else {
     window.addEventListener("keyup", keyup);
   }
@@ -36,7 +36,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   if (isSecondary) {
-    greeter?.authentication_complete?.disconnect(authSuccess);
+    greeter.authentication_complete?.disconnect(authSuccess);
   } else {
     window.removeEventListener("keyup", keyup);
   }

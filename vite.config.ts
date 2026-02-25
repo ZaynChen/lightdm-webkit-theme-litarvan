@@ -1,13 +1,13 @@
 import { fileURLToPath, URL } from "node:url";
 
 import { defineConfig } from "vite";
-import vueRouter from "unplugin-vue-router/vite";
 import vue from "@vitejs/plugin-vue";
+import vueRouter from "vue-router/vite";
 import autoprefixer from "autoprefixer";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [vueRouter(), vue()],
+  plugins: [vue(), vueRouter({ dts: "src/route-map.d.ts" })],
   base: "./",
   resolve: {
     alias: {
@@ -22,19 +22,15 @@ export default defineConfig({
   build: {
     rolldownOptions: {
       input: {
-        primary: fileURLToPath(new URL("./index.html", import.meta.url)),
-        secondary: fileURLToPath(new URL("./secondary.html", import.meta.url)),
+        primary: "./index.html",
+        secondary: "./secondary.html",
       },
       output: {
         chunkFileNames: "js/[name]-[hash].js",
         entryFileNames: "js/[name]-[hash].js",
 
-        // images to assets dir
-        // js to js dir
-        // css, ttf to css dir
-        // default to assets dir
-        assetFileNames: ({ name }) => {
-          if (/\.(css|ttf)$/.test(name ?? "")) {
+        assetFileNames: ({ names }) => {
+          if (/\.(css|ttf)$/.test(names[0])) {
             return "css/[name]-[hash][extname]";
           }
 

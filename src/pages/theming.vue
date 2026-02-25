@@ -7,9 +7,7 @@ import { bg, backgrounds, color, DEFAULT_COLOR } from "@/ts/themer";
 import { trans } from "@/ts/translations";
 
 const title = trans("theming");
-const bgPath =
-  greeter_config?.branding.background_images_dir ||
-  greeter_config?.branding.background_images;
+const bgPath = greeter_config.branding.background_images_dir;
 const bgAddLabel = trans("bgAdd");
 const randomizeLabel = trans("randomizeBG");
 const colorLabel = trans("primaryColor");

@@ -1,6 +1,6 @@
-import { ref, reactive, watch } from "vue";
-import { settings } from "@/ts/settings";
-import DEFAULT_BG from "@/assets/images/background.png";
+import { reactive, ref, watch } from "vue";
+import { settings } from "./settings";
+import DEFAULT_BG from "../assets/images/background.png";
 
 // Theme color
 const DEFAULT_COLOR = "#249cea";
@@ -27,20 +27,20 @@ watch(bg, (bg) => (background.value = backgrounds[bg] ?? background.value));
 watch(background, (background) => {
   // autosave background
   localStorage.setItem("background", background);
-  greeter_comm?.broadcast({
+  greeter_comm.broadcast({
     type: "change-background",
     path: background,
   });
 });
 
 if (settings.randomizeBG) {
-  let rand_idx = Math.floor(Math.random() * backgrounds.length);
+  const rand_idx = Math.floor(Math.random() * backgrounds.length);
   if (backgrounds[rand_idx]) {
     bg.value = rand_idx;
     background.value = backgrounds[rand_idx];
   }
 } else {
-  let idx = backgrounds.findIndex((b) => b === background.value);
+  const idx = backgrounds.findIndex((b: string) => b === background.value);
   if (idx > 0) {
     bg.value = idx;
   } else {
@@ -50,9 +50,7 @@ if (settings.randomizeBG) {
 }
 
 async function getBackgrounds() {
-  const folder =
-    greeter_config?.branding.background_images_dir ??
-    greeter_config?.branding.background_images;
+  const folder = greeter_config.branding.background_images_dir;
 
   if (!folder) {
     return [];
@@ -61,10 +59,10 @@ async function getBackgrounds() {
 }
 
 async function recDirList(dir: string) {
-  let result: string[] = [];
+  const result: string[] = [];
 
   // return list of abs paths for the files and directories found in path.
-  const entries = (await theme_utils?.dirlist(dir, false)) ?? [];
+  const entries = (await theme_utils.dirlist(dir, false)) ?? [];
   for (const entry of entries) {
     // dirlist is a list of path string,
     // so no other info to use to distinguish file and dirs
@@ -80,4 +78,4 @@ async function recDirList(dir: string) {
   return result;
 }
 
-export { DEFAULT_COLOR, color, hook, bg, background, backgrounds };
+export { background, backgrounds, bg, color, DEFAULT_COLOR, hook };

@@ -1,9 +1,9 @@
-import { reactive, toRaw, watch, ref } from "vue";
+import { reactive, ref, toRaw, watch } from "vue";
 
 const state = ref("initial");
 
 function loadSettings() {
-  let obj = JSON.parse(localStorage.getItem("settings") ?? "{}");
+  const obj = JSON.parse(localStorage.getItem("settings") ?? "{}");
   obj.first ??= true;
   obj.mode ??= "classic";
   obj.blur ??= "fixed";
@@ -26,8 +26,7 @@ function loadSettings() {
 const settings = reactive(loadSettings());
 watch(settings, () =>
   // save settings once settings changed, (autosaving)
-  localStorage.setItem("settings", JSON.stringify(toRaw(settings))),
-);
+  localStorage.setItem("settings", JSON.stringify(toRaw(settings))));
 
 function avatar(avatar?: string | null) {
   if (avatar === "litarvan") {
@@ -38,7 +37,7 @@ function avatar(avatar?: string | null) {
   return avatar;
 }
 
-export { settings, avatar, state };
+export { avatar, settings, state };
 
 console.log(" --> Loaded settings :");
 console.log(toRaw(settings));

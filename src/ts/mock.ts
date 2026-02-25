@@ -1,10 +1,4 @@
-import type {
-  Session as SessionClass,
-  Greeter as GreeterClass,
-  Signal as SignalClass,
-} from "@/ts/greeter";
-
-class Session implements SessionClass {
+class Session {
   name;
   key;
   type;
@@ -44,20 +38,15 @@ class User {
   }
 }
 
-class Signal implements SignalClass {
-  _name;
-  _callbacks: ((...args: unknown[]) => void)[];
-  constructor(name: string) {
-    this._name = name;
-    this._callbacks = [];
-  }
-  connect(callback: (...args: unknown[]) => void) {
+class Signal {
+  _callbacks: ((...args: string[]) => void)[] = [];
+  connect(callback: (...args: string[]) => void) {
     this._callbacks.push(callback);
   }
-  disconnect(callback: (...args: unknown[]) => void) {
+  disconnect(callback: (...args: string[]) => void) {
     this._callbacks = this._callbacks.filter((_cb) => _cb !== callback);
   }
-  _emit(...args: unknown[]) {
+  _emit(...args: string[]) {
     this._callbacks.forEach((callback) => {
       callback(...args);
     });
@@ -69,11 +58,10 @@ let brightness = 85;
 let password;
 
 // greeter-webkit2-greeter api doc: https://doclets.io/Antergos/web-greeter/stable
-class Greeter implements GreeterClass {
-  authentication_complete = new Signal("authentication_complete");
-  autologin_timer_expired = new Signal("autologin_timer_expired");
-  show_message = new Signal("show_message");
-  show_prompt = new Signal("show_prompt");
+class Greeter {
+  authentication_complete = new Signal();
+  show_message = new Signal();
+  show_prompt = new Signal();
   authentication_user: string | null = null;
   autologin_guest = false;
   autologin_timeout = 0;
@@ -155,7 +143,7 @@ class Greeter implements GreeterClass {
     console.log(`Starting authenticating : '${username}'`);
     this.authentication_user = username;
 
-    let text = "Password: ";
+    const text = "Password: ";
     if (text === "Password: " && password !== undefined) {
       this.respond(password);
     }
@@ -206,11 +194,11 @@ class Greeter implements GreeterClass {
     level: 15,
     ac_status: true,
   };
-  battery_update = new Signal("battery_update");
-  brightness_update = new Signal("brightness");
+  battery_update = new Signal();
+  brightness_update = new Signal();
 }
 
-let greeter = new Greeter();
+const greeter = new Greeter();
 
 Object.defineProperty(greeter, "brightness", {
   get: () => {
@@ -222,23 +210,37 @@ Object.defineProperty(greeter, "brightness", {
   },
 });
 
-let theme_utils = {
+const theme_utils = {
   async dirlist(_path: string, _only_image: boolean): Promise<string[]> {
-    return ["/src/assets/images/litarvan.png"];
+    return await new Promise((resolve) =>
+      resolve(["/src/assets/images/litarvan.png"])
+    );
   },
 };
 
-let greeter_config = {
+const greeter_config = {
   branding: {
     background_images_dir: "nowhere this is live test",
+    logo_image: "/src/assets/logo.png",
+    user_image: "/src/assets/default_user.png",
   },
-  greeter: {},
+  greeter: {
+    debug_mode: true,
+    detect_theme_errors: true,
+    screensaver_timeout: 300,
+    secure_mode: true,
+    theme: "litarvan",
+    icon_theme: null,
+    time_language: null,
+  },
+  layouts: [],
 };
 
-let greeter_comm = {
-  window_metadata: null,
-  broadcast(_: any) {},
-  _emit(_: any) {},
+const greeter_comm = {
+  broadcast<T>(_: T) {},
+  _emit<T>(_: T): boolean {
+    return true;
+  },
 };
 
-export { greeter, theme_utils, greeter_config, greeter_comm };
+export { greeter, greeter_comm, greeter_config, theme_utils };

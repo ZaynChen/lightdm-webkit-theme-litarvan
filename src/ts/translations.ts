@@ -291,7 +291,7 @@ const translations: { [key: string]: { [key: string]: string } } = {
   // More ? PR opens !
 };
 
-import { lastUser } from "@/ts/greeter";
+import { lastUser } from "./greeter";
 
 function getLocale(): string {
   // using user locale
@@ -300,9 +300,9 @@ function getLocale(): string {
   }
 
   // using system locale
-  if (greeter?.language && greeter?.languages) {
-    let code = greeter.language.code.toLowerCase();
-    let language = greeter.languages.find((l) => l.code === code);
+  if (greeter.language && greeter.languages) {
+    const code = greeter.language.code.toLowerCase();
+    const language = greeter.languages.find((l) => l.code === code);
     if (language) {
       return code.replace(/\.UTF-*8/i, "").replace("_", "-");
     }
@@ -329,4 +329,4 @@ function italicDisabled() {
   return disabled.includes(getLocale());
 }
 
-export { getLocale, trans, italicDisabled };
+export { getLocale, italicDisabled, trans };

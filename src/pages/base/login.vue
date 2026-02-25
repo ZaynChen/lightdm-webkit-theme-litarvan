@@ -27,8 +27,8 @@ const props = defineProps(["immutable", "compact", "preview"]);
 
 const router = useRouter();
 
-const canHibernate = greeter?.can_hibernate;
-const canSuspend = greeter?.can_suspend;
+const canHibernate = greeter.can_hibernate;
+const canSuspend = greeter.can_suspend;
 const passwordLabel = trans("password");
 const isCompact = props.immutable ? props.compact : settings.mode === "compact";
 const powerList = ref(false);
@@ -86,7 +86,7 @@ function show_message(text: string, type: string) {
 }
 
 function authentication_complete() {
-  if (greeter?.is_authenticated) {
+  if (greeter.is_authenticated) {
     setTimeout(startSession, 400);
     router.push(settings.disableFade ? "/base" : "/intro/login");
   } else if (document.head.dataset.wintype === "primary") {
