@@ -14,10 +14,15 @@ import type {
   ParamValueZeroOrMore,
   ParamValueZeroOrOne,
 } from 'vue-router'
+import type {
+  _ExtractParamParserType,
+} from 'vue-router/experimental'
 
 declare module 'vue-router' {
   interface TypesConfig {
-    ParamParsers: never
+    _ParamParsers: {}
+    RouteNamedMap: import('vue-router/auto-routes').RouteNamedMap
+    _RouteFileInfoMap: import('vue-router/auto-routes')._RouteFileInfoMap
   }
 }
 
@@ -102,6 +107,8 @@ declare module 'vue-router/auto-routes' {
         | '/'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'src/pages/base.vue': {
       routes:
@@ -111,11 +118,15 @@ declare module 'vue-router/auto-routes' {
         | '/base/splash'
       views:
         | 'default'
+      pathParamNames:
+        | never
     }
     'src/pages/base/login.vue': {
       routes:
         | '/base/login'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'src/pages/base/select_[mode].vue': {
@@ -123,11 +134,15 @@ declare module 'vue-router/auto-routes' {
         | '/base/select_[mode]'
       views:
         | never
+      pathParamNames:
+        | 'mode'
     }
     'src/pages/base/splash.vue': {
       routes:
         | '/base/splash'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'src/pages/blur.vue': {
@@ -135,17 +150,23 @@ declare module 'vue-router/auto-routes' {
         | '/blur'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'src/pages/setup.vue': {
       routes:
         | '/setup'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'src/pages/theming.vue': {
       routes:
         | '/theming'
       views:
+        | never
+      pathParamNames:
         | never
     }
   }
