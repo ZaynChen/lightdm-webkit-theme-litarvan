@@ -50,7 +50,7 @@ if (settings.randomizeBG) {
 }
 
 async function getBackgrounds() {
-  const folder = greeter_config.branding.background_images_dir;
+  const folder = greeter_config.branding?.background_images_dir;
 
   if (!folder) {
     return [];
